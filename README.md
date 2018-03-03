@@ -1,7 +1,7 @@
 # ESPOL - Fundamentos de Programación
 
 
-## Validation data script
+## Script de validación de datos
 Este script le servirá a cada profesor de Fundamentos de Programaciòn para validar el formato de los datos que se solicitan al finalizar el semestre. 
 
 El script deberá variar para cada semestre según las ponderaciones de los temas de los examenes, proyectos y sustentaciones. 
@@ -36,27 +36,27 @@ El script deberá variar para cada semestre según las ponderaciones de los tema
 
 **Validaciones implementadas**
 
-| Tipo de error    | Color    | Script fixs it | Comentarios |
+| Tipo de error    | Color    | Soluciona | Comentarios |
 | ---------------  |----------| :------:| ----------------|
 | Vacio            | Naranja  |         | Los datos básicos (Nombre, paralelo, ...) no deben estar vacios |
-| Opción no valida | Azul     |         | Las celdas género y veces_tomadas debe estar entre los valores posibles |
+| Opción no valida | Azul     |         | Las celdas género y veces_tomadas deben estar entre los valores posibles |
 | Fuera de rango   | Amarillo |         | La calificación debe estar dentro del rango posible |
-| Tipo no numérico | Verde    |         | Todas las calificacines deben ser entero o float |
-| No redondeado    | Rosado   |  X     | Esto aplica para las calificaciones finales |
+| Tipo no numérico | Verde    |         | Todas las calificacoines deben ser entero o float |
+| No redondeado    | Rosado   |  X     | Esto aplica para las calificaciones finales(El script lo corrige) |
 
-## Dependencies
+## Dependencias
 
 Install the next python packages:
 
 * [Openpyxl](https://openpyxl.readthedocs.io/en/stable/)
 
-## Usage
+## Uso
 
 * Complete los datos de su paralelo de fundamentos en el archivo **PARNN_2017II.xlsx**
 * Corra el script pero modifique el nombre del archivo en la línea 8. Al finalizar se imprimirá un mensaje con la cantidad de estudiantes en los que se encontraron errores.
 * Abra su archivo y verifique si hay celdas con los colores descritos en la tabla descrita anteriormente.
 * Corrija los errores y vuelva a correr el script.
 
-## Inquietudes
+======
 
-* eslozano
+© 2018 eslozano
