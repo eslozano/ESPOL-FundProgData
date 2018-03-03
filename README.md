@@ -2,7 +2,9 @@
 
 
 ## Validation data script
-Este script servirá para validar los datos recolectados en Fundamentos de Programación. El script deberá variar para cada semestre según las ponderaciones de los temas de los examenes, proyectos y sustentaciones. 
+Este script le servirá a cada profesor de Fundamentos de Programaciòn para validar el formato de los datos que se solicitan al finalizar el semestre. 
+
+El script deberá variar para cada semestre según las ponderaciones de los temas de los examenes, proyectos y sustentaciones. 
 
 **Datos a validar(2017-II):**
 
@@ -36,11 +38,11 @@ Este script servirá para validar los datos recolectados en Fundamentos de Progr
 
 | Tipo de error    | Color    | Script fixs it | Comentarios |
 | ---------------  |----------| :------:| ----------------|
-| Vacio            | Naranja  |         | Se validan los datos básicos |
-| Opción no valida | Azul     |         | Debe estar entre las opciones válidas |
-| Fuera de rango   | Amarillo |         | Es mayor o menor al valor posible |
-| Tipo no numérico | Verde    |         | No es entero ni float |
-| No redondeado    | Rosado   |  SI     | Esto aplica para las calificaciones finales |
+| Vacio            | Naranja  |         | Los datos básicos (Nombre, paralelo, ...) no deben estar vacios |
+| Opción no valida | Azul     |         | Las celdas género y veces_tomadas debe estar entre los valores posibles |
+| Fuera de rango   | Amarillo |         | La calificación debe estar dentro del rango posible |
+| Tipo no numérico | Verde    |         | Todas las calificacines deben ser entero o float |
+| No redondeado    | Rosado   |  X     | Esto aplica para las calificaciones finales |
 
 ## Dependencies
 
@@ -55,3 +57,6 @@ Install the next python packages:
 * Abra su archivo y verifique si hay celdas con los colores descritos en la tabla descrita anteriormente.
 * Corrija los errores y vuelva a correr el script.
 
+## Inquietudes
+
+* eslozano

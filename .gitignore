@@ -1,6 +1,6 @@
-*.xlsx
-*.ipynb
-__pycache__
-.ipynb_checkpoints
+src/*.xlsx
+src/*.ipynb
+src/__pycache__
+src/.ipynb_checkpoints
 
-!PARNN_2017II.xlsx
+!src/PARNN_2017II.xlsx
