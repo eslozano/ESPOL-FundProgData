@@ -106,7 +106,7 @@ class Estudiante:
 				errores[validacion].append(campo)
 		return errores
 
-	def redondearCalificacionFinales(self,TIPO_NO_NUMERICO):
+	def redondearCalifFinales(self,TIPO_NO_NUMERICO):
 		for nombre in self.calif_final:
 			if not self.validarNumero(self.calif_final[nombre],TIPO_NO_NUMERICO):
 				self.calif_final[nombre]= round(self.calif_final[nombre])
