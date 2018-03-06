@@ -16,6 +16,7 @@ El script deberá variar para cada semestre según las ponderaciones de los tema
 * veces_tomadas
 * 1er_proyecto
 * 1er_sustent
+* 1er_lecciones
 * 1er_calif\_final
 * 1er_exam\_tema1
 * 1er_exam\_tema2
@@ -23,6 +24,7 @@ El script deberá variar para cada semestre según las ponderaciones de los tema
 * 1er_exam\_tema4
 * 2do_proyecto
 * 2do_sustent
+* 2do_lecciones
 * 2do_calif\_final
 * 2do_exam\_tema1
 * 2do_exam\_tema2

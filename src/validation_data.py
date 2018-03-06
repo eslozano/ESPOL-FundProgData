@@ -85,9 +85,9 @@ def dataAnalysis(filename):
 
 #Las columnas deben estar en el orden del excel
 columnas = ["nombre","matricula","genero","paralelo","cod_carrera","veces_tomadas",
-			"1er_proyecto", "1er_sustent", "1er_calif_final",
+			"1er_proyecto", "1er_sustent","1er_lecciones", "1er_calif_final",
 			"1er_exam_tema1","1er_exam_tema2","1er_exam_tema3","1er_exam_tema4",
-			"2do_proyecto", "2do_sustent", "2do_calif_final",
+			"2do_proyecto", "2do_sustent","2do_lecciones", "2do_calif_final",
 			"2do_exam_tema1","2do_exam_tema2","2do_exam_tema3",
 			"calif_final_practica",
 			"3er_proyecto","3er_calif_final",
@@ -114,7 +114,8 @@ validaciones = {
 		"1er_exam_": { "tema1": 20, "tema2": 32, "tema3": 45, "tema4": 10 },
 		"2do_exam_": { "tema1": 35, "tema2": 55, "tema3": 10 },
 		"3er_exam_": { "tema1": 40, "tema2": 55, "tema3": 10 } #el tema 2 tiene bono de 5 puntos
-	}
+	},
+	"lecciones":10,
 }
 
 validateDataSheet(filename,columnas,colors,errorsMessages, validaciones)

@@ -11,13 +11,14 @@ class Estudiante:
 	proyecto = None
 	examen = None
 	calif_final = None
+	lecciones = None
 
 	def __init__(self, datos):
 		#La tupla contiene el objeto celda del excel para cada variable
 		nombre,matricula,genero,paralelo,cod_carrera,veces_tomadas, \
-			primer_proyecto,primer_sustent,primer_calif_final, \
+			primer_proyecto,primer_sustent,primer_lecciones,primer_calif_final, \
 			primer_exam_tema1,primer_exam_tema2,primer_exam_tema3,primer_exam_tema4, \
-			segundo_proyecto,segundo_sustent,segundo_calif_final, \
+			segundo_proyecto,segundo_sustent,segundo_lecciones,segundo_calif_final, \
 			segundo_exam_tema1,segundo_exam_tema2,segundo_exam_tema3, \
 			calif_final_practica, \
 			tercer_proyecto,tercer_calif_final, \
@@ -40,6 +41,10 @@ class Estudiante:
 			"2do_calif_final":segundo_calif_final,
 			"3er_calif_final":tercer_calif_final,
 			"calif_final_practica": calif_final_practica
+		}
+		self.lecciones = {
+			"1er_lecciones":primer_lecciones,
+			"2do_lecciones": segundo_lecciones
 		}
 
 
@@ -77,6 +82,10 @@ class Estudiante:
 		d['veces_tomadas'] = self.validarVecesTomadas(self.veces_tomadas,OPCION_NO_VALIDA,validaciones['veces_tomadas'])
 		#Variables con más validaciones
 		d['genero'] = self.validarDatoVacio(self.genero,VACIO) or self.validarGenero(self.genero,OPCION_NO_VALIDA, validaciones['genero'])
+
+		for nombre,calif in self.lecciones.items():
+			if calif:
+				d[nombre] = self.validarNumero(calif,TIPO_NO_NUMERICO) or self.validarCalificacion(calif, FUERA_DE_RANGO, validaciones['lecciones'])
 
 		for nombre,calif in self.sustent.items():
 			if calif:
