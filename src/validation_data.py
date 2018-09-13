@@ -5,7 +5,7 @@ import pandas as pd
 
 
 #Escriba el nombre del archivo de los datos a validar
-filename = "PARNN_2017II.xlsx"
+filename = "PAR1_2018I.xlsx"
 
 
 
@@ -21,6 +21,19 @@ TIPO_NO_NUMERICO = 'dato_no_numerico'
 def fillCell(cell,color,fill_type=None):
 	fill = PatternFill(fgColor=color,fill_type=fill_type)
 	cell.fill = fill
+
+def convertirDatosNumericos(estudiante,row,columnas):
+	for i,columna in enumerate(columnas):
+		if "exam" in columna:
+			for examen, temas in estudiante.examen.items():
+				for tema, calif in temas.items():
+					if calif and examen+tema == columna: 
+						row[i].value = calif
+		else:
+			for actividad,dataD in estudiante.actividades.items():
+				for item,calif in dataD.items():
+					if calif and item==columna:
+						row[i].value = calif
 
 def validateDataSheet(filename,columnas,colores,errorsMessages,validaciones):
 	header_rows = 2
@@ -41,18 +54,22 @@ def validateDataSheet(filename,columnas,colores,errorsMessages,validaciones):
 				data.append(cell.value)
 				fillCell(cell,colores[VACIO]) #Restore cell color
 			estudiante = Estudiante(data)
+			estudiante.convertir()
+			convertirDatosNumericos(estudiante,row,columnas)
+			#Luego de convertir datos numéricos, se valida
 			errores = estudiante.validar(errorsMessages,validaciones)
-			if len(errores[NO_REDONDEADO]): #Si hay valores no redondeados en las calificaciones finales
-				estudiante.redondearCalifFinales(TIPO_NO_NUMERICO)
 			countErrorStudent = 0
 			for error, campos in errores.items():
-				if error!=NO_REDONDEADO: #El error detectado es corregido por el script
-					color = colores[error]
-					countErrorStudent += len(campos)
-					for c in campos:
-						if c in columnas:
-							i = columnas.index(c)
-							fillCell(row[i],color,'solid')
+				color = colores[error]
+				countErrorStudent += len(campos)
+				for columna in campos:
+					if columna in columnas:
+						i = columnas.index(columna)
+						if error==NO_REDONDEADO: #El error detectado es corregido por el script
+							row[i].value = estudiante.calif_final[columna]
+						else:
+							fillCell(row[i],color,'solid') #Errores no corregidos se pintan
+			
 			if countErrorStudent:
 				print('{:<9}{}'.format('FALLÓ',estudiante.nombre))
 				total_errors += 1
@@ -60,15 +77,19 @@ def validateDataSheet(filename,columnas,colores,errorsMessages,validaciones):
 				print('{:<9}{}'.format('OK',estudiante.nombre))
 		if total_errors:
 			print("RESULTADOS: Se detectaron errores en las calificaciones de ", total_errors," estudiantes.")
-			print("Revise en el archivo las celdas resaltadas de colores:")
-			print("Naranja(celda_vacia), Azul(opcion_no_valida), Amarillo(fuera_de_rango) o Verde(dato_no_numerico).")
-			print("="*100)
-			print("** Los errores de dato_no_redondeado fueron corregidos por el script")
+			print()
+			print("Revise su archivo de calificaciones, y corrija los errores de las CELDAS RESALTADAS con los siguientes colores:")
+			print("1. Naranja \t --> \t Dato requerido.")
+			print("2. Azul \t --> \t Valor no válido, revise la cabecera del archivo modelo para las posibles opciones.")
+			print("3. Amarillo \t --> \t Valor fuera del rango posible.")
+			#print("4. Verde \t --> \t El dato no es numérico.")
+			print("="*150)
+			print("**OJO: Los errores tipo dato_no_redondeado y dato_no_numerico fueron corregidos por el script")
 		else:
-			print("="*100)
+			print("="*150)
 			print('¡Felicidades! Tu archivo de excel está listo para ser enviado')
 			print('Por favor enviar a rabonilla@espol.edu.ec y a eslozano@espol.edu.ec')
-		print("="*100)
+		print("="*150)
 		print("Copyright (c) 2018 eslozano")
 		print('All Rights Reserved :)')
 		wb.save(filename)
@@ -86,7 +107,7 @@ def dataAnalysis(filename):
 #Las columnas deben estar en el orden del excel
 columnas = ["nombre","matricula","genero","paralelo","cod_carrera","veces_tomadas",
 			"1er_proyecto", "1er_sustent","1er_lecciones", "1er_calif_final",
-			"1er_exam_tema1","1er_exam_tema2","1er_exam_tema3","1er_exam_tema4",
+			"1er_exam_tema1","1er_exam_tema2","1er_exam_tema3",
 			"2do_proyecto", "2do_sustent","2do_lecciones", "2do_calif_final",
 			"2do_exam_tema1","2do_exam_tema2","2do_exam_tema3",
 			"calif_final_practica",
@@ -98,7 +119,7 @@ colors = {
 	VACIO:"ffd8bf", #naranja 
 	OPCION_NO_VALIDA: '6aa2fc', #azul 
 	FUERA_DE_RANGO: 'fffa00', #amarillo
-	TIPO_NO_NUMERICO: '7cff94', #verde
+	TIPO_NO_NUMERICO: '96D701', #verde
 	NO_REDONDEADO: 'ff7ff4' #rosado
 }
 
@@ -111,9 +132,9 @@ validaciones = {
 	"sustent": 1,
 	"proyecto": {"1er_proyecto":20,"2do_proyecto":20,"3er_proyecto":25},
 	"examen":{
-		"1er_exam_": { "tema1": 20, "tema2": 32, "tema3": 45, "tema4": 10 },
-		"2do_exam_": { "tema1": 35, "tema2": 55, "tema3": 10 },
-		"3er_exam_": { "tema1": 40, "tema2": 55, "tema3": 10 } #el tema 2 tiene bono de 5 puntos
+		"1er_exam_": { "tema1": 40, "tema2": 50, "tema3": 10 },
+		"2do_exam_": { "tema1": 40, "tema2": 50, "tema3": 10 },
+		"3er_exam_": { "tema1": 40, "tema2": 50, "tema3": 10 }
 	},
 	"lecciones":10,
 }

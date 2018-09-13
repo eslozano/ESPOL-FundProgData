@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+2018-03-06: v1.3
+--------------------
+
+* The script fixes two type of errors: Not rounded values and value not numeric.
+
+
 2018-03-06: v1.2
 --------------------
 

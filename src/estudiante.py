@@ -17,7 +17,7 @@ class Estudiante:
 		#La tupla contiene el objeto celda del excel para cada variable
 		nombre,matricula,genero,paralelo,cod_carrera,veces_tomadas, \
 			primer_proyecto,primer_sustent,primer_lecciones,primer_calif_final, \
-			primer_exam_tema1,primer_exam_tema2,primer_exam_tema3,primer_exam_tema4, \
+			primer_exam_tema1,primer_exam_tema2,primer_exam_tema3, \
 			segundo_proyecto,segundo_sustent,segundo_lecciones,segundo_calif_final, \
 			segundo_exam_tema1,segundo_exam_tema2,segundo_exam_tema3, \
 			calif_final_practica, \
@@ -29,22 +29,32 @@ class Estudiante:
 		self.paralelo = paralelo
 		self.cod_carrera = cod_carrera
 		self.veces_tomadas = veces_tomadas
-		self.sustent = {"1er_sustent": primer_sustent, "2do_sustent": segundo_sustent}
-		self.proyecto = {"1er_proyecto":primer_proyecto,"2do_proyecto":segundo_proyecto,"3er_proyecto":tercer_proyecto}
-		self.examen ={
-			"1er_exam_": { "tema1": primer_exam_tema1 , "tema2": primer_exam_tema2 , "tema3": primer_exam_tema3 , "tema4": primer_exam_tema4 },
+		self.actividades = {
+			"sustent" : {
+				"1er_sustent": primer_sustent, 
+				"2do_sustent": segundo_sustent
+			},
+			"proyecto" : {
+				"1er_proyecto":primer_proyecto,
+				"2do_proyecto":segundo_proyecto,
+				"3er_proyecto":tercer_proyecto
+			},
+			"lecciones" : { 
+				"1er_lecciones":primer_lecciones,
+				"2do_lecciones": segundo_lecciones
+			},
+			"calif_final":{
+				"1er_calif_final":primer_calif_final,
+				"2do_calif_final":segundo_calif_final,
+				"3er_calif_final":tercer_calif_final,
+				"calif_final_practica": calif_final_practica
+			}		
+		}
+
+		self.examen = {
+			"1er_exam_": { "tema1": primer_exam_tema1 , "tema2": primer_exam_tema2 , "tema3": primer_exam_tema3 },
 			"2do_exam_": { "tema1": segundo_exam_tema1 , "tema2": segundo_exam_tema2 , "tema3": segundo_exam_tema3 },
 			"3er_exam_": { "tema1": tercer_exam_tema1 , "tema2": tercer_exam_tema2 , "tema3": tercer_exam_tema3 }
-		}
-		self.calif_final = {
-			"1er_calif_final":primer_calif_final,
-			"2do_calif_final":segundo_calif_final,
-			"3er_calif_final":tercer_calif_final,
-			"calif_final_practica": calif_final_practica
-		}
-		self.lecciones = {
-			"1er_lecciones":primer_lecciones,
-			"2do_lecciones": segundo_lecciones
 		}
 
 
@@ -83,21 +93,17 @@ class Estudiante:
 		#Variables con más validaciones
 		d['genero'] = self.validarDatoVacio(self.genero,VACIO) or self.validarGenero(self.genero,OPCION_NO_VALIDA, validaciones['genero'])
 
-		for nombre,calif in self.lecciones.items():
-			if calif:
-				d[nombre] = self.validarNumero(calif,TIPO_NO_NUMERICO) or self.validarCalificacion(calif, FUERA_DE_RANGO, validaciones['lecciones'])
-
-		for nombre,calif in self.sustent.items():
-			if calif:
-				d[nombre] = self.validarNumero(calif,TIPO_NO_NUMERICO) or self.validarCalificacion(calif, FUERA_DE_RANGO, validaciones['sustent'])
-
-		for nombre, calif in self.calif_final.items():
-			if calif:
-				d[nombre] = self.validarNumero(calif,TIPO_NO_NUMERICO) or self.validarCalificacion(calif, FUERA_DE_RANGO, validaciones['calif_final']) or self.validarRedondeo(calif,NO_REDONDEADO)
-
-		for nombre, calif in self.proyecto.items():
-			if calif:
-				d[nombre] = self.validarNumero(calif,TIPO_NO_NUMERICO) or self.validarCalificacion(calif, FUERA_DE_RANGO, validaciones['proyecto'][nombre])
+		for actividad, califD in self.actividades.items():
+			for nombre,calif in califD.items():
+				if calif:
+					if actividad=="proyecto":
+						valorValidacion = validaciones['proyecto'][nombre]
+					else:
+						valorValidacion = validaciones[actividad]
+					validacion = self.validarNumero(calif,TIPO_NO_NUMERICO) or self.validarCalificacion(calif, FUERA_DE_RANGO, valorValidacion )
+					if actividad=="calif_final":
+						validacion = validacion or self.validarRedondeo(calif,NO_REDONDEADO)
+					d[nombre] = validacion
 
 		for examen, temas in self.examen.items():
 			for tema, calif in temas.items():
@@ -115,8 +121,17 @@ class Estudiante:
 				errores[validacion].append(campo)
 		return errores
 
-	def redondearCalifFinales(self,TIPO_NO_NUMERICO):
-		for nombre in self.calif_final:
-			if not self.validarNumero(self.calif_final[nombre],TIPO_NO_NUMERICO):
-				self.calif_final[nombre]= round(self.calif_final[nombre])
+	def convertir(self):
+		for actividad, califD in self.actividades.items():
+			for nombre,calif in califD.items():
+				if calif:
+					if actividad == "calif_final": #Notas finales siempre deben ser redondeadas
+						valor = int(calif)
+					else:
+						valor = float(calif)
+					self.actividades[actividad][nombre] = valor
 
+		for examen, temas in self.examen.items():
+			for tema, calificacion in temas.items():
+				if calificacion:
+					self.examen[examen][tema] = float(calificacion)
