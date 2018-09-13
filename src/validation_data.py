@@ -5,7 +5,7 @@ import pandas as pd
 
 
 #Escriba el nombre del archivo de los datos a validar
-filename = "PAR1_2018I.xlsx"
+filename = "PARNN_2018I.xlsx"
 
 
 
