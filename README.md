@@ -6,7 +6,7 @@ Este script le servirá a cada profesor de Fundamentos de Programaciòn para val
 
 El script deberá variar para cada semestre según las ponderaciones de los temas de los examenes, proyectos y sustentaciones. 
 
-**Datos a validar(2017-II):**
+**Datos a validar:**
 
 * Nombre
 * Matricula
@@ -48,17 +48,18 @@ El script deberá variar para cada semestre según las ponderaciones de los tema
 
 ## Dependencias
 
-Install the next python packages:
+Instalar el siguiente paquete de python:
 
 * [Openpyxl](https://openpyxl.readthedocs.io/en/stable/)
 
 ## Uso
 
 * Complete los datos de su paralelo de fundamentos en el archivo **PARNN_AÑOTERMINO.xlsx**
-* Corra el script **validation_data.py** pero modifique el nombre del archivo en la línea 8. Al finalizar se imprimirá un mensaje con la cantidad de estudiantes en los que se encontraron errores.
-* Abra su archivo y verifique si hay celdas con los colores descritos en la tabla descrita anteriormente.
-* Corrija los errores y vuelva a correr el script.
+* Corra el script **validation_data.py** pero modifique el nombre del archivo en la línea 8
+* Al finalizar se imprimirá un mensaje con la cantidad de estudiantes en los que se encontraron errores.
+* Abra su archivo y corrija las celdas con los colores descritos en la tabla descrita anterior.
+* Vuelva a correr el script.
 
-======
+====================================
 
 © 2018 eslozano
