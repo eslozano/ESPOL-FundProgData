@@ -1,7 +1,14 @@
 Change Log
 ==========
 
-2018-03-06: v1.3
+2018-09-21: v1.4
+--------------------
+
+* Fixes column bug. The script select only data of N columns, not all anymore. 
+* Reported by Jose Villa 
+
+
+2018-09-06: v1.3
 --------------------
 
 * The script fixes two type of errors: Not rounded values and value not numeric.

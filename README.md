@@ -43,7 +43,7 @@ El script deberá variar para cada semestre según las ponderaciones de los tema
 | Vacio            | Naranja  |         | Los datos básicos (Nombre, paralelo, ...) no deben estar vacios |
 | Opción no valida | Azul     |         | Las celdas género y veces_tomadas deben estar entre los valores posibles |
 | Fuera de rango   | Amarillo |         | La calificación debe estar dentro del rango posible |
-| Tipo no numérico | Verde    |         | Todas las calificacoines deben ser entero o float |
+| Tipo no numérico | Verde    |  X     | Todas las calificacoines deben ser entero o float |
 | No redondeado    | Rosado   |  X     | Esto aplica para las calificaciones finales(El script lo corrige) |
 
 ## Dependencias
@@ -54,8 +54,8 @@ Install the next python packages:
 
 ## Uso
 
-* Complete los datos de su paralelo de fundamentos en el archivo **PARNN_2017II.xlsx**
-* Corra el script pero modifique el nombre del archivo en la línea 8. Al finalizar se imprimirá un mensaje con la cantidad de estudiantes en los que se encontraron errores.
+* Complete los datos de su paralelo de fundamentos en el archivo **PARNN_AÑOTERMINO.xlsx**
+* Corra el script **validation_data.py** pero modifique el nombre del archivo en la línea 8. Al finalizar se imprimirá un mensaje con la cantidad de estudiantes en los que se encontraron errores.
 * Abra su archivo y verifique si hay celdas con los colores descritos en la tabla descrita anteriormente.
 * Corrija los errores y vuelva a correr el script.
 
