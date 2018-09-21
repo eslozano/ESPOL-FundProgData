@@ -13,7 +13,7 @@ class Estudiante:
 	calif_final = None
 	lecciones = None
 
-	def __init__(self, datos):
+	def __init__(self, datos, columnas):
 		#La tupla contiene el objeto celda del excel para cada variable
 		nombre,matricula,genero,paralelo,cod_carrera,veces_tomadas, \
 			primer_proyecto,primer_sustent,primer_lecciones,primer_calif_final, \
@@ -22,7 +22,7 @@ class Estudiante:
 			segundo_exam_tema1,segundo_exam_tema2,segundo_exam_tema3, \
 			calif_final_practica, \
 			tercer_proyecto,tercer_calif_final, \
-			tercer_exam_tema1,tercer_exam_tema2,tercer_exam_tema3 = datos
+			tercer_exam_tema1,tercer_exam_tema2,tercer_exam_tema3 = datos[:columnas]
 		self.nombre = nombre
 		self.matricula = matricula
 		self.genero = genero

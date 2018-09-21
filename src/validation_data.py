@@ -5,7 +5,7 @@ import pandas as pd
 
 
 #Escriba el nombre del archivo de los datos a validar
-filename = "PARNN_2018I.xlsx"
+filename = "PAR18_2018I.xlsx"
 
 
 
@@ -53,7 +53,7 @@ def validateDataSheet(filename,columnas,colores,errorsMessages,validaciones):
 			for cell in row:
 				data.append(cell.value)
 				fillCell(cell,colores[VACIO]) #Restore cell color
-			estudiante = Estudiante(data)
+			estudiante = Estudiante(data, len(columnas))
 			estudiante.convertir()
 			convertirDatosNumericos(estudiante,row,columnas)
 			#Luego de convertir datos numéricos, se valida
